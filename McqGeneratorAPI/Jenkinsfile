@@ -1,12 +1,12 @@
 pipeline {
   agent {
-    docker { image 'mcr.microsoft.com/dotnet/sdk:9.0' }
+    docker { image 'mcr.microsoft.com/dotnet/sdk:8.0' }
   }
   stages {
     stage('Build') {
       steps {
         echo 'Building the application...'
-        sh 'export HOME=/tmp && cd McqGeneratorAPI && dotnet build'
+        sh 'export HOME=/tmp && cd McqGeneratorAPI && dotnet build --no-restore'
       }
     }
     stage('Test') {
