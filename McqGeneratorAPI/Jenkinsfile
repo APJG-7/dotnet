@@ -1,0 +1,12 @@
+pipeline {
+  agent {
+    docker { image 'mcr.microsoft.com/dotnet/aspnet:9.0' }
+  }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'dotnet --version'
+      }
+    }
+  }
+}
