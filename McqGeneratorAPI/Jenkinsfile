@@ -3,15 +3,31 @@ pipeline {
     docker { image 'mcr.microsoft.com/dotnet/sdk:9.0' }
   }
   stages {
-    stage('Build'){
-      steps{
-        sh 'dotnet watch run'
+    stage('Build') {
+      steps {
+        echo 'Building the application...'
+        sh 'dotnet build'
       }
     }
     stage('Test') {
       steps {
+        echo 'Running tests...'
+        sh 'dotnet test'
+      }
+    }
+    stage('Verify .NET Version') {
+      steps {
+        echo 'Verifying .NET SDK version...'
         sh 'dotnet --version'
       }
+    }
+  }
+  post {
+    always {
+      echo 'Pipeline execution completed.'
+    }
+    failure {
+      echo 'Pipeline failed. Check the logs for details.'
     }
   }
 }
