@@ -3,6 +3,11 @@ pipeline {
     docker { image 'mcr.microsoft.com/dotnet/sdk:9.0' }
   }
   stages {
+    stage('Build'){
+      steps{
+        sh 'dotnet watch run'
+      }
+    }
     stage('Test') {
       steps {
         sh 'dotnet --version'
